@@ -156,30 +156,30 @@
 
       <div class="section-label">Persönliche Angaben</div>
       <div class="row two">
-        <div class="field"><label>Vorname *</label><input type="text" id="vorname" placeholder="z. B. Kevin" /></div>
+        <div class="field"><label>Vorname *</label><input type="text" id="vorname" placeholder="z. B. Max" /></div>
         <div class="field"><label>Nachname *</label><input type="text" id="nachname" placeholder="z. B. Muster" /></div>
       </div>
       <div class="row two">
         <div class="field"><label>Position / Titel</label><input type="text" id="position" placeholder="z. B. Team Projekte" /></div>
-        <div class="field"><label>Abteilung / Firma</label><input type="text" id="firma" value="Geschäftsführung" /></div>
+        <div class="field"><label>Abteilung / Firma</label><input type="text" id="firma" value="TDA-HR-Software-Entwicklungs GmbH" /></div>
       </div>
 
       <div class="section-label">Kontaktdaten</div>
       <div class="row two">
         <div class="field"><label>Telefon</label><input type="tel" id="telefon" placeholder="+49 155 ..." /></div>
-        <div class="field"><label>E-Mail *</label><input type="email" id="email" placeholder="muster@mail.de" /></div>
+        <div class="field"><label>E-Mail *</label><input type="email" id="email" placeholder="name@tda-hr.de" /></div>
       </div>
       <div class="row">
-        <div class="field"><label>Website</label><input type="url" id="website" value="https://beispiel.com" /></div>
+        <div class="field"><label>Website</label><input type="url" id="website" value="https://tda-hr.de" /></div>
       </div>
 
       <div class="section-label">Adresse</div>
       <div class="row">
-        <div class="field"><label>Straße &amp; Hausnummer</label><input type="text" id="strasse" placeholder="Musterstraße" /></div>
+        <div class="field"><label>Straße &amp; Hausnummer</label><input type="text" id="strasse" placeholder="Musterstraße 1" /></div>
       </div>
       <div class="row three">
         <div class="field"><label>PLZ</label><input type="text" id="plz" placeholder="12345" /></div>
-        <div class="field"><label>Ort</label><input type="text" id="ort" placeholder="Düsseldorf" /></div>
+        <div class="field"><label>Ort</label><input type="text" id="ort" placeholder="Musterstadt" /></div>
         <div class="field"><label>Land</label><input type="text" id="land" value="Deutschland" /></div>
       </div>
 
@@ -244,7 +244,7 @@ function generateQR() {
 
   const qrDiv = document.getElementById('qrcode');
   qrDiv.innerHTML = '';
-  new QRCode(qrDiv, { text: vcard, width: 220, height: 220, colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
+  new QRCode(qrDiv, { text: vcard, width: 220, height: 220, colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.L });
 
   document.getElementById('qr-label-name').textContent = `${vorname} ${nachname}`;
   document.getElementById('qr-label-company').textContent = firma || '';
