@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TDA QR-Generator</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -31,15 +31,12 @@
                       radial-gradient(ellipse 40% 30% at 10% 80%, rgba(232,201,126,0.06) 0%, transparent 60%);
   }
 
-  .container { max-width: 860px; margin: 0 auto; }
+  .container { max-width: 900px; margin: 0 auto; }
 
   header {
-    margin-bottom: 40px;
-    padding-bottom: 28px;
+    margin-bottom: 40px; padding-bottom: 28px;
     border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: flex-end;
-    gap: 20px;
+    display: flex; align-items: flex-end; gap: 20px;
   }
 
   .logo-mark {
@@ -94,7 +91,6 @@
   .generate-btn:active { transform: translateY(0); }
 
   .qr-panel { position: sticky; top: 24px; }
-
   .qr-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; text-align: center; }
 
   .qr-placeholder {
@@ -109,8 +105,8 @@
   #qr-output { display: none; flex-direction: column; align-items: center; gap: 16px; }
   #qr-output.visible { display: flex; }
 
-  #qrcode { background: white; padding: 12px; border-radius: 14px; display: inline-block; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
-  #qrcode canvas, #qrcode img { display: block; border-radius: 6px; }
+  #qrcode-wrapper { background: white; padding: 12px; border-radius: 14px; display: inline-block; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+  #qrcode-wrapper canvas { display: block; border-radius: 6px; }
 
   .qr-name { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.2; }
   .qr-company { font-size: 11px; color: var(--muted); margin-top: 2px; }
@@ -132,7 +128,7 @@
 
   .hint { font-size: 11px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
 
-  @media (max-width: 680px) {
+  @media (max-width: 720px) {
     .layout { grid-template-columns: 1fr; }
     .row.two { grid-template-columns: 1fr; }
     .row.three { grid-template-columns: 1fr 1fr; }
@@ -156,30 +152,30 @@
 
       <div class="section-label">Persönliche Angaben</div>
       <div class="row two">
-        <div class="field"><label>Vorname *</label><input type="text" id="vorname" placeholder="z. B. Kevin" /></div>
-        <div class="field"><label>Nachname *</label><input type="text" id="nachname" placeholder="z. B. Mustermann" /></div>
+        <div class="field"><label>Vorname *</label><input type="text" id="vorname" placeholder="Max" /></div>
+        <div class="field"><label>Nachname *</label><input type="text" id="nachname" placeholder="Mustermann" /></div>
       </div>
       <div class="row two">
-        <div class="field"><label>Position / Titel</label><input type="text" id="position" placeholder="z. B. Team Projekte" /></div>
-        <div class="field"><label>Abteilung / Firma</label><input type="text" id="firma" placeholder="TDA-HR-Software-Entwicklungs GmbH" /></div>
+        <div class="field"><label>Position / Titel</label><input type="text" id="position" placeholder="Softwareentwickler" /></div>
+        <div class="field"><label>Abteilung / Firma</label><input type="text" id="firma" value="TDA-HR-Software-Entwicklungs GmbH" /></div>
       </div>
 
       <div class="section-label">Kontaktdaten</div>
       <div class="row two">
-        <div class="field"><label>Telefon</label><input type="tel" id="telefon" placeholder="+49 155 ..." /></div>
-        <div class="field"><label>E-Mail *</label><input type="email" id="email" placeholder="name@muster.de" /></div>
+        <div class="field"><label>Telefon</label><input type="tel" id="telefon" placeholder="+49 2182 000000" /></div>
+        <div class="field"><label>E-Mail</label><input type="email" id="email" placeholder="max.mustermann@tda-hr.de" /></div>
       </div>
       <div class="row">
-        <div class="field"><label>Website</label><input type="url" id="website" placeholder="https://muster.de" /></div>
+        <div class="field"><label>Website</label><input type="url" id="website" value="https://tda-hr.de" /></div>
       </div>
 
       <div class="section-label">Adresse</div>
       <div class="row">
-        <div class="field"><label>Straße &amp; Hausnummer</label><input type="text" id="strasse" placeholder="Musterstraße 1" /></div>
+        <div class="field"><label>Straße &amp; Hausnummer</label><input type="text" id="strasse" value="Schloss Hülchrath 1" /></div>
       </div>
       <div class="row three">
-        <div class="field"><label>PLZ</label><input type="text" id="plz" placeholder="12345" /></div>
-        <div class="field"><label>Ort</label><input type="text" id="ort" placeholder="Musterstadt" /></div>
+        <div class="field"><label>PLZ</label><input type="text" id="plz" value="41516" /></div>
+        <div class="field"><label>Ort</label><input type="text" id="ort" value="Grevenbroich" /></div>
         <div class="field"><label>Land</label><input type="text" id="land" value="Deutschland" /></div>
       </div>
 
@@ -197,7 +193,7 @@
           <span>Formular ausfüllen<br>und generieren</span>
         </div>
         <div id="qr-output">
-          <div id="qrcode"></div>
+          <div id="qrcode-wrapper"><canvas id="qrcanvas"></canvas></div>
           <div>
             <div class="qr-name" id="qr-label-name"></div>
             <div class="qr-company" id="qr-label-company"></div>
@@ -233,32 +229,34 @@ function generateQR() {
     'BEGIN:VCARD', 'VERSION:3.0',
     `N:${nachname};${vorname}`,
     `FN:${vorname} ${nachname}`,
-    firma    ? `ORG:${firma}`                        : '',
-    position ? `TITLE:${position}`                   : '',
-    telefon  ? `TEL;TYPE=WORK,VOICE:${telefon}`      : '',
-    email    ? `EMAIL;TYPE=INTERNET:${email}`         : '',
-    website  ? `URL:${website}`                       : '',
+    firma    ? `ORG:${firma}`                   : '',
+    position ? `TITLE:${position}`              : '',
+    telefon  ? `TEL;TYPE=WORK,VOICE:${telefon}` : '',
+    email    ? `EMAIL;TYPE=INTERNET:${email}`    : '',
+    website  ? `URL:${website}`                  : '',
     (strasse || ort || plz || land) ? `ADR;TYPE=WORK:;;${strasse};${ort};;${plz};${land}` : '',
     'END:VCARD'
   ].filter(Boolean).join('\n');
 
-  const qrDiv = document.getElementById('qrcode');
-  qrDiv.innerHTML = '';
-  new QRCode(qrDiv, { text: vcard, width: 300, height: 300, colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.L });
+  // QRious – kein Datenlimit, direkt auf Canvas gerendert
+  new QRious({
+    element: document.getElementById('qrcanvas'),
+    value: vcard,
+    size: 300,
+    level: 'L',
+    background: '#ffffff',
+    foreground: '#000000'
+  });
 
   document.getElementById('qr-label-name').textContent = `${vorname} ${nachname}`;
   document.getElementById('qr-label-company').textContent = firma || '';
   document.getElementById('qr-placeholder').style.display = 'none';
   document.getElementById('qr-output').classList.add('visible');
 
-  setTimeout(() => {
-    const canvas = qrDiv.querySelector('canvas');
-    if (canvas) {
-      const link = document.getElementById('download-link');
-      link.href = canvas.toDataURL('image/png');
-      link.download = `${vorname.toLowerCase()}_${nachname.toLowerCase()}_qr.png`;
-    }
-  }, 300);
+  const canvas = document.getElementById('qrcanvas');
+  const link = document.getElementById('download-link');
+  link.href = canvas.toDataURL('image/png');
+  link.download = `${vorname.toLowerCase()}_${nachname.toLowerCase()}_qr.png`;
 }
 
 document.addEventListener('keydown', e => { if (e.key === 'Enter') generateQR(); });
