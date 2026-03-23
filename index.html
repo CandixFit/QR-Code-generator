@@ -54,7 +54,7 @@
   .header-text h1 { font-family: 'DM Serif Display', serif; font-size: 26px; font-weight: 400; letter-spacing: -0.3px; line-height: 1; }
   .header-text p { font-size: 13px; color: var(--muted); margin-top: 5px; font-weight: 300; }
 
-  .layout { display: grid; grid-template-columns: 1fr 280px; gap: 24px; align-items: start; }
+  .layout { display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start; }
 
   .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
 
@@ -98,7 +98,7 @@
   .qr-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; text-align: center; }
 
   .qr-placeholder {
-    width: 220px; height: 220px; margin: 0 auto 16px;
+    width: 300px; height: 300px; margin: 0 auto 16px;
     border-radius: 14px; background: var(--input-bg);
     border: 2px dashed var(--border);
     display: flex; align-items: center; justify-content: center;
@@ -156,8 +156,8 @@
 
       <div class="section-label">Persönliche Angaben</div>
       <div class="row two">
-        <div class="field"><label>Vorname *</label><input type="text" id="vorname" placeholder="z. B. Max" /></div>
-        <div class="field"><label>Nachname *</label><input type="text" id="nachname" placeholder="z. B. Muster" /></div>
+        <div class="field"><label>Vorname *</label><input type="text" id="vorname" placeholder="z. B. Can" /></div>
+        <div class="field"><label>Nachname *</label><input type="text" id="nachname" placeholder="z. B. Cingöz" /></div>
       </div>
       <div class="row two">
         <div class="field"><label>Position / Titel</label><input type="text" id="position" placeholder="z. B. Team Projekte" /></div>
@@ -175,11 +175,11 @@
 
       <div class="section-label">Adresse</div>
       <div class="row">
-        <div class="field"><label>Straße &amp; Hausnummer</label><input type="text" id="strasse" placeholder="Musterstraße 1" /></div>
+        <div class="field"><label>Straße &amp; Hausnummer</label><input type="text" id="strasse" placeholder="Schloss Hülchrath 1" /></div>
       </div>
       <div class="row three">
-        <div class="field"><label>PLZ</label><input type="text" id="plz" placeholder="12345" /></div>
-        <div class="field"><label>Ort</label><input type="text" id="ort" placeholder="Musterstadt" /></div>
+        <div class="field"><label>PLZ</label><input type="text" id="plz" placeholder="41516" /></div>
+        <div class="field"><label>Ort</label><input type="text" id="ort" placeholder="Grevenbroich" /></div>
         <div class="field"><label>Land</label><input type="text" id="land" value="Deutschland" /></div>
       </div>
 
@@ -244,7 +244,7 @@ function generateQR() {
 
   const qrDiv = document.getElementById('qrcode');
   qrDiv.innerHTML = '';
-  new QRCode(qrDiv, { text: vcard, width: 220, height: 220, colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.L });
+  new QRCode(qrDiv, { text: vcard, width: 300, height: 300, colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.L });
 
   document.getElementById('qr-label-name').textContent = `${vorname} ${nachname}`;
   document.getElementById('qr-label-company').textContent = firma || '';
